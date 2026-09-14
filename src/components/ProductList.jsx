@@ -1,7 +1,20 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './ProductList.scss';
 import ProductItem from './ProductItem';
 
 const ProductList = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {   
+      const response = await axios.get('https://panda-market-api.vercel.app/products?page=1&pageSize=10&orderBy=recent');
+      setProducts(response.data.list);
+    }
+
+    loadProducts();
+  }, []);
+
   return (
     <section className='inner'>
       <div className='product-container-header'>
@@ -16,16 +29,17 @@ const ProductList = () => {
         </form>
       </div>
       <div className='product-container'>
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
+        {
+          products.map(product => 
+            <ProductItem 
+              key={product.id}
+              image={product.images[0]}
+              name={product.name}
+              price={product.price}
+              favoriteCount={product.favoriteCount}
+            />
+          )
+        }
       </div>
       <ul className='pagination'>
         <li className='prev'><a href='#'>&lt;</a></li>
