@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { productApi } from '../services/api';
 import './ProductList.scss';
 import ProductItem from './ProductItem';
 
@@ -7,9 +7,10 @@ const BestProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const loadProducts = async () => {   
-      const response = await axios.get('https://panda-market-api.vercel.app/products?page=1&pageSize=4&orderBy=favorite');
-      setProducts(response.data.list);
+    const loadProducts = async () => {
+      const query = 'page=1&pageSize=4&orderBy=favorite';
+      const envelop = await productApi.getProducts(query);
+      setProducts(envelop.data.list);
     }
 
     loadProducts();

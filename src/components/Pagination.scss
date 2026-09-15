@@ -1,0 +1,52 @@
+.pagination{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 140px;
+
+  li{
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--secondary-color-200);
+    border-radius: 50%;
+
+    &.prev-btn, &.next-btn{
+      overflow: hidden;
+      text-indent: -999rem;
+      background-image: url(../assets/ic_arrow_left.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    &.next-btn{
+      background-image: url(../assets/ic_arrow_right.svg);
+    }
+
+    a{
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: var(--secondary-color-500);
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    &.on{
+      border: none;
+      background: #2F80ED;
+
+      a{
+        color: var(--secondary-color-100);
+      }
+    }
+  }
+
+  ul.indicators{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    width: 216px;
+  }
+}
