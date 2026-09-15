@@ -125,14 +125,14 @@ main{
         border: 1px solid var(--secondary-color-200);
         border-radius: 50%;
 
-        &.prev, &.next{
+        &.prev-btn, &.next-btn{
           overflow: hidden;
           text-indent: -999rem;
           background-image: url(../assets/ic_arrow_left.svg);
           background-repeat: no-repeat;
           background-position: center;
         }
-        &.next{
+        &.next-btn{
           background-image: url(../assets/ic_arrow_right.svg);
         }
 

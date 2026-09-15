@@ -21,7 +21,7 @@ const ProductItem = ({
         <a href='#'>{price?.toLocaleString()}원</a>
       </p>
       <button className='like-btn'>
-        <span className='like-count'>{favoriteCount}</span>
+        <span className='like-count'>{favoriteCount?.toLocaleString()}</span>
       </button>
     </div>
   );

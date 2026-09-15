@@ -2,7 +2,7 @@ import './Header.css';
 
 const Header = () => {
   return (
-    <header className>
+    <header>
       <nav className='gnb'>
         <h1 className='logo'><a href='/'>판다마켓</a></h1>
         <ul>
