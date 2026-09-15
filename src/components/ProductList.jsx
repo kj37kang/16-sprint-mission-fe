@@ -10,18 +10,19 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [indicators, setIndicators] = useState([1, 2, 3, 4, 5]);
+  const [orderBy, setOrderBy] = useState('recent');
 
   useEffect(() => {
     const loadProducts = async () => {
       const url = 'https://panda-market-api.vercel.app/products';
-      const query = `?page=${page}&pageSize=${pageSize}&orderBy=recent`;
+      const query = `?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}`;
       const response = await axios.get(url + query);
       maxPage = Math.ceil(response.data.totalCount / pageSize);
       setProducts(response.data.list);
     };
 
     loadProducts();
-  }, [page]);
+  }, [page, orderBy]);
 
   const createIndicators = (targetPage) => {
     const indicatorPool = [];
@@ -56,6 +57,12 @@ const ProductList = () => {
     }
   };
 
+  const handleSelect = (event) => {
+    setPage(1);
+    setIndicators(createIndicators(1));
+    setOrderBy(event.target.value);
+  }
+
   return (
     <section className='inner'>
       <div className='product-container-header'>
@@ -63,7 +70,7 @@ const ProductList = () => {
         <form>
           <input id='searchInput' type='text' placeholder='검색할 상품을 입력해주세요' />
           <button className='open-modal-btn' type='button'>상품 등록하기</button>
-          <select name='sort' id='sort'>
+          <select name='sort' id='sort' onChange={handleSelect}>
             <option value='recent'>최신순</option> 
             <option value='favorite'>좋아요순</option>
           </select>
