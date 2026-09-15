@@ -18,10 +18,10 @@ main{
 
     .product-container{
       margin: 16px 0 40px;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      column-gap: 24px;
       row-gap: 40px;
-      flex-wrap: wrap;
     }
 
     // ProductList Only
@@ -30,6 +30,10 @@ main{
       justify-content: space-between;
       align-items: center;
       height: 42px;
+
+      &+.product-container{
+        grid-template-rows: repeat(2, 1fr);
+      }
 
       form{
         display: flex;
@@ -155,6 +159,13 @@ main{
             color: var(--secondary-color-100);
           }
         }
+      }
+
+      ul.indicators{
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+        width: 216px;
       }
     }
   }
