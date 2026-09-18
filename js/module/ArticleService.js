@@ -46,7 +46,7 @@ export const getArticleList = ({
     pageSize = 10,
     orderBy = 'recent',
     keyword = '',
-  }) => {
+  } = {}) => {
   const queryUrl = `?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&keyword=${keyword}`;
   fetch(url + queryUrl)
     .then(response => validateResponse(response))
@@ -62,7 +62,7 @@ export const getArticleList = ({
 }
 
 // 게시글 정보 불러오기
-export const getArticle = ({id}) => {
+export const getArticle = ({id} = {}) => {
   fetch(`${url}/${id}`)
     .then(response => validateResponse(response))
     .then(article => {
@@ -78,7 +78,7 @@ export const getArticle = ({id}) => {
 }
 
 // 게시글 작성하기
-export const createArticle = (articleData) => {
+export const createArticle = (articleData = {}) => {
   fetch(url, {
     method: 'POST',
     headers: {
@@ -99,7 +99,7 @@ export const createArticle = (articleData) => {
 }
 
 // 게시글 수정하기
-export const patchArticle = ({id, ...articleData}) => {
+export const patchArticle = ({id, ...articleData} = {}) => {
   fetch(`${url}/${id}`, {
     method: 'PATCH',
     headers: {
@@ -121,7 +121,7 @@ export const patchArticle = ({id, ...articleData}) => {
 }
 
 // 게시글 삭제하기
-export const deleteArticle = ({id}) => {
+export const deleteArticle = ({id} = {}) => {
   fetch(`${url}/${id}`, {
     method: 'DELETE'
   })

@@ -47,7 +47,7 @@ export const getProductList = async ({
     pageSize = 10,
     orderBy = 'recent',
     keyword = '',
-  }) => {
+  } = {}) => {
   try{
     const queryUrl = `?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&keyword=${keyword}`;
     const response = await fetch(url + queryUrl);
@@ -69,7 +69,7 @@ export const getProductList = async ({
 }
 
 // 상품 정보 불러오기
-export const getProduct = async ({id}) => {
+export const getProduct = async ({id} = {}) => {
   try{
     const response = await fetch(`${url}/${id}`);
     const product = await validateResponse(response);
@@ -89,7 +89,7 @@ export const getProduct = async ({id}) => {
 }
 
 // 상품 등록하기
-export const createProduct = async (productData) => {
+export const createProduct = async (productData = {}) => {
   try{
     const response = await fetch(url, {
       method: 'POST',
@@ -116,7 +116,7 @@ export const createProduct = async (productData) => {
 }
 
 // 상품 수정하기
-export const patchProduct = async ({id, ...productData}) => {
+export const patchProduct = async ({id, ...productData} = {}) => {
   try{
     const response = await fetch(`${url}/${id}`, {
       method: 'PATCH',
@@ -142,7 +142,7 @@ export const patchProduct = async ({id, ...productData}) => {
 }
 
 // 상품 삭제하기
-export const deleteProduct = async ({id}) => {
+export const deleteProduct = async ({id} = {}) => {
   try{
     const response = await fetch(`${url}/${id}`, {
       method: 'DELETE'
