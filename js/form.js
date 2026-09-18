@@ -8,7 +8,7 @@ form.addEventListener('click', event => {
 
   if(!isToggleBtn) return;
 
-  const inputBox = event.target.closest('div');
+  const inputBox = event.target.closest('div[class^="password"]');
   const input = inputBox.querySelector('input');
   
   input.type = input.type === 'password' ? 'text' : 'password';
@@ -23,5 +23,5 @@ form.addEventListener('input', event => {
   
   const submitBtn = form.querySelector('.submit-btn');
 
-  isSubmitOk ? submitBtn.disabled = false : submitBtn.disabled = true;
+  submitBtn.disabled = !isSubmitOk;
 });
