@@ -12,8 +12,8 @@ const validateResponse = async (response) => {
   return response.json();
 }
 
-// 에러 메시지 출력
-const printErrorMessage = (error) => {
+// 에러 발생
+const throwFormattedError = (error) => {
   switch(error.message){
     case 'Not Found':
       error.message = '서버 요청에 실패했습니다.'
@@ -22,7 +22,7 @@ const printErrorMessage = (error) => {
       error.message = '매개변수가 잘못 입력됐습니다.'
       break;
   }
-  console.log(`⛔ 에러: ${error.message}`);
+  throw error;
 }
 
 // 날짜 형식 변경
@@ -69,7 +69,7 @@ export const getProductList = async (params = {}) => {
 
     return data.list;
   }catch(error){
-    printErrorMessage(error);
+    throwFormattedError(error);
   }
 }
 
@@ -91,7 +91,7 @@ export const getProduct = async ({id} = {}) => {
 
     return product;
   }catch(error){
-    printErrorMessage(error);
+    throwFormattedError(error);
   }
 }
 
@@ -118,7 +118,7 @@ export const createProduct = async (productData = {}) => {
 
     return product;
   }catch(error){
-    printErrorMessage(error);
+    throwFormattedError(error);
   }
 }
 
@@ -146,7 +146,7 @@ export const patchProduct = async ({id, ...productData} = {}) => {
 
     return product;
   }catch(error){
-    printErrorMessage(error);
+    throwFormattedError(error);
   }
 }
 
@@ -163,6 +163,6 @@ export const deleteProduct = async ({id} = {}) => {
 
     return product;
   }catch(error){
-    printErrorMessage(error);
+    throwFormattedError(error);
   }
 }

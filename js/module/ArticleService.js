@@ -11,8 +11,8 @@ const validateResponse = (response) => {
   return response.json();
 }
 
-// 에러 메시지 출력
-const printErrorMessage = (error) => {
+// 에러 발생
+const throwFormattedError = (error) => {
   switch(error.message){
     case 'Not Found':
       error.message = '서버 요청에 실패했습니다.'
@@ -21,7 +21,7 @@ const printErrorMessage = (error) => {
       error.message = '매개변수가 잘못 입력됐습니다.'
       break;
   }
-  console.log(`⛔ 에러: ${error.message}`);
+  throw error;
 }
 
 // 날짜 형식 변경
@@ -67,7 +67,7 @@ export const getArticleList = (params = {}) => {
 
       return data.list;
     })
-    .catch(error => printErrorMessage(error));
+    .catch(error => throwFormattedError(error));
 }
 
 // 게시글 정보 불러오기
@@ -85,7 +85,7 @@ export const getArticle = ({id} = {}) => {
 
       return article;
     })
-    .catch(error => printErrorMessage(error));
+    .catch(error => throwFormattedError(error));
 }
 
 // 게시글 작성하기
@@ -108,7 +108,7 @@ export const createArticle = (articleData = {}) => {
 
       return article;
     })
-    .catch(error => printErrorMessage(error));
+    .catch(error => throwFormattedError(error));
 }
 
 // 게시글 수정하기
@@ -132,7 +132,7 @@ export const patchArticle = ({id, ...articleData} = {}) => {
 
       return article;
     })
-    .catch(error => printErrorMessage(error));
+    .catch(error => throwFormattedError(error));
 }
 
 // 게시글 삭제하기
@@ -147,5 +147,5 @@ export const deleteArticle = ({id} = {}) => {
 
       return article;
     })
-    .catch(error => printErrorMessage(error));
+    .catch(error => throwFormattedError(error));
 }
