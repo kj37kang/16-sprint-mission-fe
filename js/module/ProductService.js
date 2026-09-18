@@ -42,18 +42,23 @@ const formatDate = (dateValue) => {
 // ===== 상품 관련 함수 정의 ===== //
 
 // 상품 목록 불러오기
-export const getProductList = async ({
-    page = 1,
-    pageSize = 10,
-    orderBy = 'recent',
-    keyword = '',
-  } = {}) => {
+export const getProductList = async (params = {}) => {
   try{
-    const queryUrl = `?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&keyword=${keyword}`;
-    const response = await fetch(url + queryUrl);
+    const queryParams = {
+      page: 1,
+      pageSize: 10,
+      orderBy: 'recent',
+      ...params
+    };
+    const queryUrl = new URLSearchParams();
+    for(const key in queryParams){
+      if(queryParams[key] !== ''){
+        queryUrl.append(key, queryParams[key]);
+      }
+    }
+    
+    const response = await fetch(`${url}?${queryUrl}`);
     const data = await validateResponse(response);
-
-    console.log(queryUrl)
     
     console.log('\n🛒 상품 목록을 불러왔습니다.\n');
     console.log(`전체 상품: ${data.totalCount}개`);

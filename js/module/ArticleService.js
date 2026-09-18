@@ -41,14 +41,21 @@ const formatDate = (dateValue) => {
 // ===== 게시글 관련 함수 정의 ===== //
 
 // 게시글 목록 불러오기
-export const getArticleList = ({
-    page = 1,
-    pageSize = 10,
-    orderBy = 'recent',
-    keyword = '',
-  } = {}) => {
-  const queryUrl = `?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&keyword=${keyword}`;
-  fetch(url + queryUrl)
+export const getArticleList = (params = {}) => {
+  const queryParams = {
+    page: 1,
+    pageSize: 10,
+    orderBy: 'recent',
+    ...params
+  };
+  const queryUrl = new URLSearchParams();
+  for(const key in queryParams){
+    if(queryParams[key] !== ''){
+      queryUrl.append(key, queryParams[key]);
+    }
+  }
+
+  fetch(`${url}?${queryUrl}`)
     .then(response => validateResponse(response))
     .then(data => {
       console.log('\n📜 게시글 목록을 불러왔습니다.\n');
