@@ -6,31 +6,31 @@ import { getProductList, getProduct, createProduct, patchProduct, deleteProduct 
 // 📜 게시글 목록 조회
 getArticleList({
   keyword: '',
-});
-
-// 📄 게시글 정보 조회
-getArticle({
-  id: 7020,
-});
-
-// 📝게시글 작성
-createArticle({
-  title: '제목',
-  content: '내용',
-  image: 'https://example.com/image.jpg',
-});
-
-// ✍🏻 게시글 수정
-patchArticle({
-  id: 0,
-  title: '제목 수정',
-  content: '내용 수정',
-  image: 'https://example.com/image_edited.jpg',
-});
-
-// 🗑️ 게시글 삭제
-deleteArticle({
-  id: 0,
+}).then(articleList => {
+  // 📄 게시글 정보 조회
+  getArticle({
+    id: articleList[0].id,
+  });
+}).then(() => {
+  // 📝게시글 작성
+  createArticle({
+    title: '제목',
+    content: '내용',
+    image: 'https://example.com/image.jpg',
+  }).then(article => {
+    // ✍🏻 게시글 수정
+    patchArticle({
+      id: article.id,
+      title: '제목 수정',
+      content: '내용 수정',
+      image: 'https://example.com/image_edited.jpg',
+    }).then(article => {
+      // 🗑️ 게시글 삭제
+      deleteArticle({
+        id: article.id,
+      });
+    });
+  });
 });
 
 // ===== 상품 관련 ===== //

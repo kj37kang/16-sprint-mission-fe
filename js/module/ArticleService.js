@@ -55,7 +55,7 @@ export const getArticleList = (params = {}) => {
     }
   }
 
-  fetch(`${url}?${queryUrl}`)
+  return fetch(`${url}?${queryUrl}`)
     .then(response => validateResponse(response))
     .then(data => {
       console.log('\n📜 게시글 목록을 불러왔습니다.\n');
@@ -64,13 +64,15 @@ export const getArticleList = (params = {}) => {
       data.list.forEach(article => {
         console.log(`[${article.id}] ${article.title} | ${formatDate(article.createdAt)}`);
       });
+
+      return data.list;
     })
     .catch(error => printErrorMessage(error));
 }
 
 // 게시글 정보 불러오기
 export const getArticle = ({id} = {}) => {
-  fetch(`${url}/${id}`)
+  return fetch(`${url}/${id}`)
     .then(response => validateResponse(response))
     .then(article => {
       console.log('\n📄 게시글 정보를 불러왔습니다.\n');
@@ -80,13 +82,15 @@ export const getArticle = ({id} = {}) => {
       console.log(`이미지: ${article.image}`);
       console.log(`작성일: ${formatDate(article.createdAt)}`);
       console.log(`수정일: ${formatDate(article.updatedAt)}`);
+
+      return article;
     })
     .catch(error => printErrorMessage(error));
 }
 
 // 게시글 작성하기
 export const createArticle = (articleData = {}) => {
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type' : 'application/json'
@@ -101,13 +105,15 @@ export const createArticle = (articleData = {}) => {
       console.log(`내용: ${article.content}`);
       console.log(`이미지: ${article.image}`);
       console.log(`작성일: ${formatDate(article.createdAt)}`);
+
+      return article;
     })
     .catch(error => printErrorMessage(error));
 }
 
 // 게시글 수정하기
 export const patchArticle = ({id, ...articleData} = {}) => {
-  fetch(`${url}/${id}`, {
+  return fetch(`${url}/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type' : 'application/json'
@@ -123,6 +129,8 @@ export const patchArticle = ({id, ...articleData} = {}) => {
       console.log(`이미지: ${article.image}`);
       console.log(`작성일: ${formatDate(article.createdAt)}`);
       console.log(`수정일: ${formatDate(article.updatedAt)}`);
+
+      return article;
     })
     .catch(error => printErrorMessage(error));
 }
@@ -136,6 +144,8 @@ export const deleteArticle = ({id} = {}) => {
     .then(article => {
       console.log('\n🗑️ 게시글을 삭제했습니다.\n');
       console.log(`번호: ${article.id}`);
+
+      return article;
     })
     .catch(error => printErrorMessage(error));
 }

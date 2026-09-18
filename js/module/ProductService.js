@@ -88,6 +88,8 @@ export const getProduct = async ({id} = {}) => {
     console.log(`이미지: ${product.images.join(', ')}`);
     console.log(`등록일: ${formatDate(product.createdAt)}`);
     console.log(`수정일: ${formatDate(product.updatedAt)}`);
+
+    return product;
   }catch(error){
     printErrorMessage(error);
   }
@@ -141,6 +143,8 @@ export const patchProduct = async ({id, ...productData} = {}) => {
     console.log(`이미지: ${product.images.join(', ')}`);
     console.log(`등록일: ${formatDate(product.createdAt)}`);
     console.log(`수정일: ${formatDate(product.updatedAt)}`);
+
+    return product;
   }catch(error){
     printErrorMessage(error);
   }
@@ -156,6 +160,8 @@ export const deleteProduct = async ({id} = {}) => {
 
     console.log('\n🗑️ 상품을 삭제했습니다.\n');
     console.log(`번호: ${product.id}`);
+
+    return product;
   }catch(error){
     printErrorMessage(error);
   }
