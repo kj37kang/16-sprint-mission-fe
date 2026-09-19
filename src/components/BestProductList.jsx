@@ -10,8 +10,12 @@ const BestProductList = () => {
 
   useEffect(() => {
     const loadProducts = async () => {
-      const query = `page=1&pageSize=${bestPageSize}&orderBy=favorite`;
-      const envelop = await productApi.getProducts(query);
+      const query = new URLSearchParams();
+      query.set('page', 1);
+      query.set('pageSize', bestPageSize);
+      query.set('orderBy', 'favorite');
+
+      const envelop = await productApi.getProducts(query.toString());
       setProducts(envelop.data.list);
     }
 

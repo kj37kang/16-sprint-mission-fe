@@ -14,7 +14,7 @@ const ProductToolbar = ({
 
     switch (event.target){
       case inputRef.current:
-        onSetKeyword(event.target.value);
+        onSetKeyword(event.target.value.trim());
         break;
       case selectRef.current:
         onSetOrder(event.target.value);

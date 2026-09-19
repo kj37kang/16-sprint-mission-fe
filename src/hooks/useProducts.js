@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { usePageSize } from '../hooks/usePageSize';
 import { productApi } from '../services/api';
 
-// let pageSize = 10;
 let maxPage;
 
 export const useProducts = () => {
@@ -35,11 +34,13 @@ export const useProducts = () => {
 
   useEffect(() => {
     const loadProducts = async () => {
-      const query = !keyword
-        ? `page=${page}&pageSize=${pageSize}&orderBy=${order}`
-        : `page=${page}&pageSize=${pageSize}&orderBy=${order}&keyword=${keyword}`;
+      const query = new URLSearchParams();
+      query.set('page', page);
+      query.set('pageSize', pageSize);
+      query.set('orderBy', order);
+      if (keyword) query.set('keyword', keyword);
 
-      const envelop = await productApi.getProducts(query);
+      const envelop = await productApi.getProducts(query.toString());
       const { list, totalCount } = envelop.data;
       
       maxPage = Math.ceil(totalCount / pageSize);
