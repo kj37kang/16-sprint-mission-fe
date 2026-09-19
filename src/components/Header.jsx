@@ -1,4 +1,4 @@
-import './Header.css';
+import './Header.scss';
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
           <li><a href='#'>자유게시판</a></li>
           <li><a href='#'>중고마켓</a></li>
         </ul>
-        <a href='#' className='btn-login'>로그인</a>
+        <a href='#' className='login-btn'>로그인</a>
       </nav>
     </header>
   );

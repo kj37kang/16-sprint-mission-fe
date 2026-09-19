@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { usePageSize } from '../hooks/usePageSize';
 import { productApi } from '../services/api';
 
-let pageSize = 10;
+// let pageSize = 10;
 let maxPage;
 
 export const useProducts = () => {
+  const { pageSize } = usePageSize();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState('recent');
@@ -48,7 +50,7 @@ export const useProducts = () => {
     };
 
     loadProducts();
-  }, [page, order, keyword]);
+  }, [pageSize, page, order, keyword]);
 
   return {
     products,

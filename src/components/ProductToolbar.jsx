@@ -23,7 +23,7 @@ const ProductToolbar = ({
   };
 
   return (
-    <form onChange={(event) => handleForm(event)}>
+    <form className='toolbar' onChange={(event) => handleForm(event)}>
       <input
         id='searchInput'
         type='text'

@@ -86,21 +86,28 @@ input{
   color: inherit;
   font-family: inherit;
   font-size: inherit;
-}
-input::placeholder{
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  letter-spacing: 0;
+
+  &::placeholder{
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: 0;
+  }
 }
 input[type="password"]{
   font-family: 'Verdana', 'Pretendard', 'Gothic';
   letter-spacing: 0.1rem;
-}
-input[type="password"]:placeholder-shown{
-  font-family: 'Pretendard', 'Gothic';
-  letter-spacing: 0;
+
+  &:placeholder-shown{
+    font-family: 'Pretendard', 'Gothic';
+    letter-spacing: 0;
+  }
 }
 button{
   cursor: pointer;
+}
+
+/* 확인용 - 추후 삭제 예정 */
+body::-webkit-scrollbar{
+  display: none;
 }

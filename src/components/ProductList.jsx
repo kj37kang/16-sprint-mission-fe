@@ -17,16 +17,16 @@ const ProductList = () => {
   } = useProducts();
   
   return (
-    <section className='inner'>
-      <div className='product-container-header'>
+    <section className='product-section'>
+      <section className='product-container-header'>
         <h2 className='product-container-title'>판매 중인 상품</h2>
         <ProductToolbar 
           onSetPage={setPage}
           onSetOrder={setOrder}
           onSetKeyword={setKeyword}
         />
-      </div>
-      <div className='product-container'>
+      </section>
+      <section className='product-container'>
         {
           products.map(product => 
             <ProductItem 
@@ -38,7 +38,7 @@ const ProductList = () => {
             />
           )
         }
-      </div>
+      </section>
       {
         hasProducts &&
         <Pagination 
